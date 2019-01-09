@@ -14,10 +14,9 @@ import com.zhuang.fileupload.util.FileUtils;
 public class FileUploadManager {
 
 	private StoreProvider storeProvider;
-
 	private FileUploadService fileUploadService;
-
 	private List<FileUploadTemplate> templates;
+
 
 	public FileUploadService getFileUploadService() {
 		return fileUploadService;

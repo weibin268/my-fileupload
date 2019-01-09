@@ -12,22 +12,15 @@ public class FileUploadTemplate {
 
 	@Id
     private String id;
-
     private String Name;
-
     private String description;
-
     private String saveDir;
-    
     private Integer status;
-
     private Date createdTime;
-
     private Date modifiedTime;
-
     private String createdBy;
-
     private String modifiedBy;
+
 
 	public String getId() {
 		return id;

@@ -12,24 +12,16 @@ public class FileUpload {
 	
 	@Id
     private String id;
- 
     private String templateId;
- 
     private String bizId;
-    
     private String saveFullPath;
-    
     private String originFileName;
-    
     private Integer status;
-
     private Date createdTime;
-
     private Date modifiedTime;
-
     private String createdBy;
-
     private String modifiedBy;
+
 
 	public String getId() {
 		return id;

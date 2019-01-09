@@ -9,4 +9,5 @@ public interface StoreProvider {
     InputStream get(String path);
 
     void delete(String path);
+
 }
