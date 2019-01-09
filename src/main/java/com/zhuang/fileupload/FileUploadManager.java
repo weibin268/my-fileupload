@@ -19,6 +19,14 @@ public class FileUploadManager {
 
 	private List<SysFileUploadTemplate> templates;
 
+	public FileUploadService getFileUploadService() {
+		return fileUploadService;
+	}
+
+	public void setFileUploadService(FileUploadService fileUploadService) {
+		this.fileUploadService = fileUploadService;
+	}
+
 	public FileUploadManager(StoreProvider storeProvider, FileUploadService fileUploadService) {
 
 		this.storeProvider = storeProvider;
@@ -158,7 +166,6 @@ public class FileUploadManager {
 		return null;
 	}
 
-	
 	private SysFileUploadTemplate getTemplateById(String templateId) {
 		SysFileUploadTemplate result = null;
 
