@@ -2,25 +2,25 @@ package com.zhuang.fileupload.service;
 
 import java.util.List;
 
-import com.zhuang.fileupload.model.SysFileUpload;
-import com.zhuang.fileupload.model.SysFileUploadTemplate;
+import com.zhuang.fileupload.model.FileUpload;
+import com.zhuang.fileupload.model.FileUploadTemplate;
 
 public interface FileUploadService {
 
 	void delete(String id);
     
-	SysFileUpload get(String id);
+	FileUpload get(String id);
     
-    List<SysFileUpload> getListByBizId(String bizId);
+    List<FileUpload> getListByBizId(String bizId);
     
     String getBizIdById(String id);
     
-    String save(SysFileUpload model);
+    String save(FileUpload model);
     
     void submit(String[] ids);
     
     void updateBizId(String oldBizId,String newBizId);
     
-    List<SysFileUploadTemplate> getAllTemplates();
+    List<FileUploadTemplate> getAllTemplates();
     
 }

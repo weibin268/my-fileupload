@@ -6,7 +6,7 @@ CREATE TABLE sys_fileupload
     template_id VARCHAR(50) NOT NULL,
     biz_id VARCHAR(50) NOT NULL,
     save_full_path VARCHAR(1000) NOT NULL,
-    orgin_file_name VARCHAR(500),
+    origin_file_name VARCHAR(500),
   	status       INT,
   	created_time  DATETIME,
   	modified_time DATETIME,

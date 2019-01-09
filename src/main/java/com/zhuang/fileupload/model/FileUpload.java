@@ -8,7 +8,7 @@ import com.zhuang.data.orm.annotation.UnderscoreNaming;
 
 @UnderscoreNaming
 @Table(name="sys_fileupload")
-public class SysFileUpload {
+public class FileUpload {
 	
 	@Id
     private String id;
@@ -19,7 +19,7 @@ public class SysFileUpload {
     
     private String saveFullPath;
     
-    private String orginFileName;
+    private String originFileName;
     
     private Integer status;
 
@@ -63,12 +63,12 @@ public class SysFileUpload {
 		this.saveFullPath = saveFullPath;
 	}
 
-	public String getOrginFileName() {
-		return orginFileName;
+	public String getOriginFileName() {
+		return originFileName;
 	}
 
-	public void setOrginFileName(String orginFileName) {
-		this.orginFileName = orginFileName;
+	public void setOriginFileName(String originFileName) {
+		this.originFileName = originFileName;
 	}
 
 	public Integer getStatus() {
@@ -113,8 +113,8 @@ public class SysFileUpload {
 
 	@Override
 	public String toString() {
-		return "SysFileUpload [id=" + id + ", templateId=" + templateId + ", bizId=" + bizId + ", saveFullPath="
-				+ saveFullPath + ", orginFileName=" + orginFileName + ", status=" + status + ", createdTime="
+		return "FileUpload [id=" + id + ", templateId=" + templateId + ", bizId=" + bizId + ", saveFullPath="
+				+ saveFullPath + ", originFileName=" + originFileName + ", status=" + status + ", createdTime="
 				+ createdTime + ", modifiedTime=" + modifiedTime + ", createdBy=" + createdBy + ", modifiedBy="
 				+ modifiedBy + "]";
 	}

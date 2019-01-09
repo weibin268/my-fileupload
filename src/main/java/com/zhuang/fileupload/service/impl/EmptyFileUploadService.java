@@ -2,8 +2,8 @@ package com.zhuang.fileupload.service.impl;
 
 import java.util.List;
 
-import com.zhuang.fileupload.model.SysFileUpload;
-import com.zhuang.fileupload.model.SysFileUploadTemplate;
+import com.zhuang.fileupload.model.FileUpload;
+import com.zhuang.fileupload.model.FileUploadTemplate;
 import com.zhuang.fileupload.service.FileUploadService;
 
 public class EmptyFileUploadService implements FileUploadService{
@@ -13,12 +13,12 @@ public class EmptyFileUploadService implements FileUploadService{
 		
 	}
 
-	public SysFileUpload get(String id) {
+	public FileUpload get(String id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public List<SysFileUpload> getListByBizId(String bizId) {
+	public List<FileUpload> getListByBizId(String bizId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -28,7 +28,7 @@ public class EmptyFileUploadService implements FileUploadService{
 		return null;
 	}
 
-	public String save(SysFileUpload model) {
+	public String save(FileUpload model) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -39,7 +39,7 @@ public class EmptyFileUploadService implements FileUploadService{
 	}
 
 
-	public List<SysFileUploadTemplate> getAllTemplates() {
+	public List<FileUploadTemplate> getAllTemplates() {
 		// TODO Auto-generated method stub
 		return null;
 	}

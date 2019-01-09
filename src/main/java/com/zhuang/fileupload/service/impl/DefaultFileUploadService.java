@@ -7,8 +7,8 @@ import java.util.Map;
 import java.util.UUID;
 
 import com.zhuang.data.DbAccessor;
-import com.zhuang.fileupload.model.SysFileUpload;
-import com.zhuang.fileupload.model.SysFileUploadTemplate;
+import com.zhuang.fileupload.model.FileUpload;
+import com.zhuang.fileupload.model.FileUploadTemplate;
 import com.zhuang.fileupload.service.FileUploadService;
 
 public class DefaultFileUploadService implements FileUploadService{
@@ -27,28 +27,28 @@ public class DefaultFileUploadService implements FileUploadService{
 	
 	public void delete(String id) {
 
-		dbAccessor.delete(id, SysFileUpload.class);
+		dbAccessor.delete(id, FileUpload.class);
 		
 	}
 
-	public SysFileUpload get(String id) {
+	public FileUpload get(String id) {
 
-		return dbAccessor.select(id, SysFileUpload.class);
+		return dbAccessor.select(id, FileUpload.class);
 	}
 
-	public List<SysFileUpload> getListByBizId(String bizId) {
+	public List<FileUpload> getListByBizId(String bizId) {
 		
-		return dbAccessor.queryEntities("com.zhuang.fileupload.mapper.SysFileUpload.getListByBizId", bizId, SysFileUpload.class);
+		return dbAccessor.queryEntities("com.zhuang.fileupload.mapper.FileUpload.getListByBizId", bizId, FileUpload.class);
 	
 	}
 	
 	public String getBizIdById(String id) {
 	
-		return dbAccessor.queryEntity("com.zhuang.fileupload.mapper.SysFileUpload.getBizIdById", id, String.class);
+		return dbAccessor.queryEntity("com.zhuang.fileupload.mapper.FileUpload.getBizIdById", id, String.class);
 	
 	}
 
-	public String save(SysFileUpload model)
+	public String save(FileUpload model)
 	{
 		if(model.getId()!=null && model.getId().length()>0)
 		{
@@ -74,13 +74,13 @@ public class DefaultFileUploadService implements FileUploadService{
 		
 		params.put("newBizId", newBizId);
 		
-		dbAccessor.executeNonQuery("com.zhuang.fileupload.mapper.SysFileUpload.updateBizId",params);
+		dbAccessor.executeNonQuery("com.zhuang.fileupload.mapper.FileUpload.updateBizId",params);
 	
 	}
 
-	public List<SysFileUploadTemplate> getAllTemplates() {
+	public List<FileUploadTemplate> getAllTemplates() {
 		
-		return dbAccessor.queryEntities("com.zhuang.fileupload.mapper.SysFileUpload.getAllTemplates",null,SysFileUploadTemplate.class);
+		return dbAccessor.queryEntities("com.zhuang.fileupload.mapper.FileUpload.getAllTemplates",null, FileUploadTemplate.class);
 	
 	}
 
@@ -88,7 +88,7 @@ public class DefaultFileUploadService implements FileUploadService{
 		
 		for (String id : ids) {
 			
-			dbAccessor.executeNonQuery("com.zhuang.fileupload.mapper.SysFileUpload.submitById",id);
+			dbAccessor.executeNonQuery("com.zhuang.fileupload.mapper.FileUpload.submitById",id);
 				
 		}
 		

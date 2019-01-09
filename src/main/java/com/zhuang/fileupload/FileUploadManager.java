@@ -6,8 +6,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
-import com.zhuang.fileupload.model.SysFileUpload;
-import com.zhuang.fileupload.model.SysFileUploadTemplate;
+import com.zhuang.fileupload.model.FileUpload;
+import com.zhuang.fileupload.model.FileUploadTemplate;
 import com.zhuang.fileupload.service.FileUploadService;
 import com.zhuang.fileupload.util.FileUtils;
 
@@ -17,7 +17,7 @@ public class FileUploadManager {
 
 	private FileUploadService fileUploadService;
 
-	private List<SysFileUploadTemplate> templates;
+	private List<FileUploadTemplate> templates;
 
 	public FileUploadService getFileUploadService() {
 		return fileUploadService;
@@ -35,57 +35,57 @@ public class FileUploadManager {
 
 	}
 
-	public SysFileUpload upload(InputStream inputStream, String templateId, String fileName, String bizId) {
+	public FileUpload upload(InputStream inputStream, String templateId, String fileName, String bizId) {
 
-		SysFileUploadTemplate sysFileUploadTemplate = getTemplateById(templateId);
-		return upload(inputStream, sysFileUploadTemplate, fileName, bizId);
+		FileUploadTemplate fileUploadTemplate = getTemplateById(templateId);
+		return upload(inputStream, fileUploadTemplate, fileName, bizId);
 
 	}
 
-	public SysFileUpload upload(InputStream inputStream, SysFileUploadTemplate template, String fileName,
-			String bizId) {
+	public FileUpload upload(InputStream inputStream, FileUploadTemplate template, String fileName,
+							 String bizId) {
 
 		String path = template.getSaveDir() + "/" + UUID.randomUUID().toString() + FileUtils.getExtension(fileName);
 
 		storeProvider.save(inputStream, path);
 
-		SysFileUpload sysFileUpload = new SysFileUpload();
-		sysFileUpload.setTemplateId(template.getId());
-		sysFileUpload.setBizId(bizId);
-		sysFileUpload.setSaveFullPath(path);
-		sysFileUpload.setOrginFileName(fileName);
-		fileUploadService.save(sysFileUpload);
+		FileUpload fileUpload = new FileUpload();
+		fileUpload.setTemplateId(template.getId());
+		fileUpload.setBizId(bizId);
+		fileUpload.setSaveFullPath(path);
+		fileUpload.setOriginFileName(fileName);
+		fileUploadService.save(fileUpload);
 
-		return sysFileUpload;
+		return fileUpload;
 	}
 
-	public InputStream download(SysFileUpload sysFileUpload) {
+	public InputStream download(FileUpload fileUpload) {
 
-		InputStream inputStream = storeProvider.get(sysFileUpload.getSaveFullPath());
+		InputStream inputStream = storeProvider.get(fileUpload.getSaveFullPath());
 
 		return inputStream;
 	}
 
 	public InputStream download(String id) {
 
-		SysFileUpload sysFileUpload = getSysFileUpload(id);
+		FileUpload fileUpload = getSysFileUpload(id);
 
-		return download(sysFileUpload);
+		return download(fileUpload);
 	}
 
 	public void delete(String id) {
 
-		SysFileUpload sysFileUpload = getSysFileUpload(id);
+		FileUpload fileUpload = getSysFileUpload(id);
 
-		delete(sysFileUpload);
+		delete(fileUpload);
 
 	}
 
-	public void delete(SysFileUpload sysFileUpload) {
+	public void delete(FileUpload fileUpload) {
 
-		storeProvider.delete(sysFileUpload.getSaveFullPath());
+		storeProvider.delete(fileUpload.getSaveFullPath());
 
-		fileUploadService.delete(sysFileUpload.getId());
+		fileUploadService.delete(fileUpload.getId());
 
 	}
 
@@ -109,13 +109,13 @@ public class FileUploadManager {
 
 		String bizId = fileUploadService.getBizIdById(ids[0]);
 
-		List<SysFileUpload> sysFileUploads = fileUploadService.getListByBizId(bizId);
+		List<FileUpload> fileUploads = fileUploadService.getListByBizId(bizId);
 
 		List<String> lsIds = Arrays.asList(ids);
 
-		for (SysFileUpload sysFileUpload : sysFileUploads) {
-			if (!lsIds.contains(sysFileUpload.getId())) {
-				delete(sysFileUpload.getId());
+		for (FileUpload fileUpload : fileUploads) {
+			if (!lsIds.contains(fileUpload.getId())) {
+				delete(fileUpload.getId());
 			}
 		}
 
@@ -126,50 +126,50 @@ public class FileUploadManager {
 		}
 	}
 
-	public SysFileUpload getSysFileUpload(String id) {
+	public FileUpload getSysFileUpload(String id) {
 
 		return fileUploadService.get(id);
 
 	}
 
-	public List<SysFileUpload> getSysFileUploadList(String bizId, boolean onlySubmitted) {
+	public List<FileUpload> getSysFileUploadList(String bizId, boolean onlySubmitted) {
 
-		List<SysFileUpload> result = new ArrayList<SysFileUpload>();
+		List<FileUpload> result = new ArrayList<FileUpload>();
 
-		for (SysFileUpload sysFileUpload : fileUploadService.getListByBizId(bizId)) {
+		for (FileUpload fileUpload : fileUploadService.getListByBizId(bizId)) {
 
-			if (onlySubmitted && sysFileUpload.getStatus() == 0) {
+			if (onlySubmitted && fileUpload.getStatus() == 0) {
 				continue;
 			}
 
-			result.add(sysFileUpload);
+			result.add(fileUpload);
 
 		}
 
 		return result;
 	}
 
-	public List<SysFileUpload> getSysFileUploadList(String bizId) {
+	public List<FileUpload> getSysFileUploadList(String bizId) {
 
 		return getSysFileUploadList(bizId, true);
 	}
 
-	public SysFileUpload getSysFileUploadFirst(String bizId) {
+	public FileUpload getSysFileUploadFirst(String bizId) {
 		
-		List<SysFileUpload> sysFileUploads = getSysFileUploadList(bizId);
+		List<FileUpload> fileUploads = getSysFileUploadList(bizId);
 
-		if(sysFileUploads.size()>0)
+		if(fileUploads.size()>0)
 		{
-			return sysFileUploads.get(0);
+			return fileUploads.get(0);
 		}
 		
 		return null;
 	}
 
-	private SysFileUploadTemplate getTemplateById(String templateId) {
-		SysFileUploadTemplate result = null;
+	private FileUploadTemplate getTemplateById(String templateId) {
+		FileUploadTemplate result = null;
 
-		for (SysFileUploadTemplate item : templates) {
+		for (FileUploadTemplate item : templates) {
 			if (item.getId().equals(templateId)) {
 				result = item;
 				break;

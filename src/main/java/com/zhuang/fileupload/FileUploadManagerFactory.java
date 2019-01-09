@@ -10,23 +10,14 @@ public class FileUploadManagerFactory {
 	private static FileUploadManager fileUploadManager;
 
 	public static synchronized FileUploadManager getDefaultFileUploadManager() {
-
 		if (fileUploadManager == null) {
-
 			MyFileUploadProperties myFileUploadProperties = new MyFileUploadProperties();
-
 			if (myFileUploadProperties.getStoreProvider().equalsIgnoreCase("ftp")) {
-
 				fileUploadManager = new FileUploadManager(new FtpStoreProvider(), new DefaultFileUploadService());
-
 			} else if (myFileUploadProperties.getStoreProvider().equalsIgnoreCase("local")) {
-
 				fileUploadManager = new FileUploadManager(new LocalStoreProvider(), new DefaultFileUploadService());
-
 			}
-
 		}
-
 		return fileUploadManager;
 	}
 

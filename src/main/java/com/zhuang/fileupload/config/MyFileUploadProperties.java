@@ -19,8 +19,7 @@ public class MyFileUploadProperties {
 
     private final static String LOCAL_BASEPATH = "my.fileupload.local-basepath";
 
-    public MyFileUploadProperties()
-    {
+    public MyFileUploadProperties() {
         this("config/my-fileupload.properties");
     }
 

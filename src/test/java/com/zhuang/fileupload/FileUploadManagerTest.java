@@ -8,10 +8,10 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.List;
 
+import com.zhuang.fileupload.model.FileUpload;
 import org.junit.Test;
 
-import com.zhuang.fileupload.model.SysFileUpload;
-import com.zhuang.fileupload.model.SysFileUploadTemplate;
+import com.zhuang.fileupload.model.FileUploadTemplate;
 
 public class FileUploadManagerTest {
 
@@ -28,10 +28,10 @@ public class FileUploadManagerTest {
 	
 		InputStream inputStream = new FileInputStream(new File("/home/zhuang/myfiles/doc/test.txt"));
 		
-		SysFileUploadTemplate sysFileUploadTemplate=new SysFileUploadTemplate();
-		sysFileUploadTemplate.setId("t1");
-		sysFileUploadTemplate.setSaveDir("test/01");
-		SysFileUpload sysFileUpload = fileUploadManager.upload(inputStream, sysFileUploadTemplate, "test.txt", "123");
+		FileUploadTemplate fileUploadTemplate =new FileUploadTemplate();
+		fileUploadTemplate.setId("t1");
+		fileUploadTemplate.setSaveDir("test/01");
+		FileUpload fileUpload = fileUploadManager.upload(inputStream, fileUploadTemplate, "test.txt", "123");
 		fileUploadManager.submit("6ae77d11-7b5d-4086-b506-9d74ee89f41c,d5a352d1-c6c2-46e2-a90f-588f5fceace0");;
 		
 		inputStream.close();
@@ -55,10 +55,10 @@ public class FileUploadManagerTest {
 	@Test
 	public void download() throws IOException {
 
-		SysFileUpload sysFileUpload = fileUploadManager.getSysFileUpload("f005d5fb-4e3c-4876-ae6c-19a8346a8a51");
+		FileUpload fileUpload = fileUploadManager.getSysFileUpload("f005d5fb-4e3c-4876-ae6c-19a8346a8a51");
 		
-		System.out.println(sysFileUpload);
-		InputStream inputStream = fileUploadManager.download(sysFileUpload);
+		System.out.println(fileUpload);
+		InputStream inputStream = fileUploadManager.download(fileUpload);
 		
 		InputStreamReader inputStreamReader=new InputStreamReader(inputStream);
 
@@ -79,10 +79,10 @@ public class FileUploadManagerTest {
 	@Test
 	public void getSysFileUploadList(){
 
-		List<SysFileUpload> sysFileUploads = fileUploadManager.getSysFileUploadList("123");
+		List<FileUpload> fileUploads = fileUploadManager.getSysFileUploadList("123");
 		
-		for (SysFileUpload sysFileUpload : sysFileUploads) {
-			System.out.println(sysFileUpload);
+		for (FileUpload fileUpload : fileUploads) {
+			System.out.println(fileUpload);
 		}
 	}
 

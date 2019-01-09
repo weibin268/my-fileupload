@@ -7,8 +7,8 @@ import com.zhuang.data.orm.annotation.Table;
 import com.zhuang.data.orm.annotation.UnderscoreNaming;
 
 @UnderscoreNaming
-@Table(name="Sys_FileUpload_Template")
-public class SysFileUploadTemplate {
+@Table(name="sys_fileupload_template")
+public class FileUploadTemplate {
 
 	@Id
     private String id;

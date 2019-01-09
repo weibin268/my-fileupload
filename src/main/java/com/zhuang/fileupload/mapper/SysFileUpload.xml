@@ -2,11 +2,11 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zhuang.fileupload.mapper.SysFileUpload">
 
-	<select id="getById" resultType="com.zhuang.fileupload.model.SysFileUpload">
+	<select id="getById" resultType="com.zhuang.fileupload.model.FileUpload">
 		SELECT * from sys_fileupload where id=#{id}
 	</select>
 	
-	<select id="getListByBizId" resultType="com.zhuang.fileupload.model.SysFileUpload">
+	<select id="getListByBizId" resultType="com.zhuang.fileupload.model.FileUpload">
 		SELECT * from sys_fileupload where biz_id=#{bizId}
 	</select>
 
@@ -14,7 +14,7 @@
 		SELECT biz_id as BizId from sys_fileupload where id=#{Id}
 	</select>
 
-	<select id="getAllTemplates" resultType="com.zhuang.fileupload.model.SysFileUploadTemplate">
+	<select id="getAllTemplates" resultType="com.zhuang.fileupload.model.FileUploadTemplate">
 		SELECT * from sys_fileupload_template where Status=1
 	</select>
 
