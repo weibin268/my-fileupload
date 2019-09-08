@@ -10,7 +10,7 @@
 
     <groupId>com.github.weibin268</groupId>
     <artifactId>my-fileupload</artifactId>
-    <version>1.0.2-SNAPSHOT</version>
+    <version>1.0.3</version>
     <packaging>jar</packaging>
     <name>my-fileupload</name>
     <description>my-fileupload</description>
@@ -51,7 +51,6 @@
                 </includes>
             </resource>
         </resources>
-
         <plugins>
             <!--定义JDK版本-->
             <plugin>
@@ -74,53 +73,45 @@
     </build>
 
     <dependencies>
-
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.12</version>
             <optional>true</optional>
         </dependency>
-
         <dependency>
             <groupId>com.github.weibin268</groupId>
             <artifactId>my-data</artifactId>
             <version>1.0.0</version>
             <optional>true</optional>
         </dependency>
-
         <dependency>
             <groupId>commons-net</groupId>
             <artifactId>commons-net</artifactId>
             <version>3.6</version>
         </dependency>
-
         <dependency>
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis</artifactId>
             <version>3.4.1</version>
             <optional>true</optional>
         </dependency>
-
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>1.7.25</version>
             <optional>true</optional>
         </dependency>
-
         <!--<dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
             <version>1.2.17</version>
         </dependency>-->
-
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>5.1.40</version>
             <optional>true</optional>
         </dependency>
-
     </dependencies>
 </project>
