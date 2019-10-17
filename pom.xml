@@ -10,7 +10,7 @@
 
     <groupId>com.github.weibin268</groupId>
     <artifactId>my-fileupload</artifactId>
-    <version>1.0.3</version>
+    <version>1.0.4</version>
     <packaging>jar</packaging>
     <name>my-fileupload</name>
     <description>my-fileupload</description>
@@ -82,7 +82,7 @@
         <dependency>
             <groupId>com.github.weibin268</groupId>
             <artifactId>my-data</artifactId>
-            <version>1.0.0</version>
+            <version>1.0.8</version>
             <optional>true</optional>
         </dependency>
         <dependency>

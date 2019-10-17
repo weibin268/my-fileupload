@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import com.zhuang.data.DbAccessor;
+import com.zhuang.fileupload.enums.CommonStatus;
 import com.zhuang.fileupload.model.FileUpload;
 import com.zhuang.fileupload.model.FileUploadTemplate;
 import com.zhuang.fileupload.service.FileUploadService;
@@ -32,11 +33,14 @@ public class DefaultFileUploadService implements FileUploadService {
     }
 
     public List<FileUpload> getListByBizId(String bizId) {
-        return dbAccessor.queryEntities("com.zhuang.fileupload.mapper.FileUpload.getListByBizId", bizId, FileUpload.class);
+        FileUpload fileUpload = new FileUpload();
+        fileUpload.setBizId(bizId);
+        return dbAccessor.selectList(fileUpload, FileUpload.class);
     }
 
     public String getBizIdById(String id) {
-        return dbAccessor.queryEntity("com.zhuang.fileupload.mapper.FileUpload.getBizIdById", id, String.class);
+        FileUpload fileUpload = dbAccessor.select(id, FileUpload.class);
+        return fileUpload == null ? null : fileUpload.getBizId();
     }
 
     public String save(FileUpload model) {
@@ -53,19 +57,29 @@ public class DefaultFileUploadService implements FileUploadService {
     }
 
     public void updateBizId(String oldBizId, String newBizId) {
-        Map<String, String> params = new HashMap<String, String>();
-        params.put("oldBizId", oldBizId);
-        params.put("newBizId", newBizId);
-        dbAccessor.executeNonQuery("com.zhuang.fileupload.mapper.FileUpload.updateBizId", params);
+        List<FileUpload> fileUploadList = getListByBizId(oldBizId);
+        fileUploadList.forEach(item -> {
+            FileUpload fileUpload = new FileUpload();
+            fileUpload.setId(item.getId());
+            fileUpload.setBizId(newBizId);
+            fileUpload.setModifiedTime(new Date());
+            dbAccessor.update(fileUpload, true);
+        });
     }
 
     public List<FileUploadTemplate> getAllTemplates() {
-        return dbAccessor.queryEntities("com.zhuang.fileupload.mapper.FileUpload.getAllTemplates", null, FileUploadTemplate.class);
+        FileUploadTemplate fileUploadTemplate = new FileUploadTemplate();
+        fileUploadTemplate.setStatus(CommonStatus.ENABLE.getValue());
+        return dbAccessor.selectList(fileUploadTemplate, FileUploadTemplate.class);
     }
 
     public void submit(String[] ids) {
         for (String id : ids) {
-            dbAccessor.executeNonQuery("com.zhuang.fileupload.mapper.FileUpload.submitById", id);
+            FileUpload fileUpload = new FileUpload();
+            fileUpload.setId(id);
+            fileUpload.setStatus(CommonStatus.ENABLE.getValue());
+            fileUpload.setModifiedTime(new Date());
+            dbAccessor.update(fileUpload, true);
         }
     }
 }
