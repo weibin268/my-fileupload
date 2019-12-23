@@ -8,13 +8,13 @@ CREATE TABLE sys_fileupload
     save_full_path VARCHAR(1000) NOT NULL,
     origin_file_name VARCHAR(500),
   	status       INT,
-  	created_time  DATETIME,
-  	modified_time DATETIME,
-  	created_by    VARCHAR(50),
-  	modified_by   VARCHAR(50)
+  	create_time  DATETIME,
+  	modify_time DATETIME,
+  	create_by    VARCHAR(50),
+  	modify_by   VARCHAR(50)
 );
 ALTER TABLE sys_fileupload COMMENT = '文件上传记录表';
-ALTER TABLE sys_fileupload ADD INDEX IDX_created_time(created_time);
+ALTER TABLE sys_fileupload ADD INDEX IDX_created_time(create_time);
 
 
 
@@ -27,10 +27,10 @@ CREATE TABLE sys_fileupload_template
     description VARCHAR(500),
     save_dir VARCHAR(500) NOT NULL,
     status       INT,
-    created_time  DATETIME,
-    modified_time DATETIME,
-    created_by    VARCHAR(50),
-    modified_by   VARCHAR(50)
+    create_time  DATETIME,
+    modify_time DATETIME,
+    create_by    VARCHAR(50),
+    modify_by   VARCHAR(50)
 );
 ALTER TABLE sys_fileupload_template COMMENT = '文件上传模板表';
-ALTER TABLE sys_fileupload_template ADD INDEX IDX_created_time(created_time);
+ALTER TABLE sys_fileupload_template ADD INDEX IDX_created_time(create_time);

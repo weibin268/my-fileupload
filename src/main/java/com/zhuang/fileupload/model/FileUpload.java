@@ -17,10 +17,10 @@ public class FileUpload {
     private String saveFullPath;
     private String originFileName;
     private Integer status;
-    private Date createdTime;
-    private Date modifiedTime;
-    private String createdBy;
-    private String modifiedBy;
+    private Date createTime;
+    private Date modifyTime;
+    private String createBy;
+    private String modifyBy;
 
 
 	public String getId() {
@@ -71,44 +71,44 @@ public class FileUpload {
 		this.status = status;
 	}
 
-	public Date getCreatedTime() {
-		return createdTime;
+	public Date getCreateTime() {
+		return createTime;
 	}
 
-	public void setCreatedTime(Date createdTime) {
-		this.createdTime = createdTime;
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
 	}
 
-	public Date getModifiedTime() {
-		return modifiedTime;
+	public Date getModifyTime() {
+		return modifyTime;
 	}
 
-	public void setModifiedTime(Date modifiedTime) {
-		this.modifiedTime = modifiedTime;
+	public void setModifyTime(Date modifyTime) {
+		this.modifyTime = modifyTime;
 	}
 
-	public String getCreatedBy() {
-		return createdBy;
+	public String getCreateBy() {
+		return createBy;
 	}
 
-	public void setCreatedBy(String createdBy) {
-		this.createdBy = createdBy;
+	public void setCreateBy(String createBy) {
+		this.createBy = createBy;
 	}
 
-	public String getModifiedBy() {
-		return modifiedBy;
+	public String getModifyBy() {
+		return modifyBy;
 	}
 
-	public void setModifiedBy(String modifiedBy) {
-		this.modifiedBy = modifiedBy;
+	public void setModifyBy(String modifyBy) {
+		this.modifyBy = modifyBy;
 	}
 
 	@Override
 	public String toString() {
 		return "FileUpload [id=" + id + ", templateId=" + templateId + ", bizId=" + bizId + ", saveFullPath="
-				+ saveFullPath + ", originFileName=" + originFileName + ", status=" + status + ", createdTime="
-				+ createdTime + ", modifiedTime=" + modifiedTime + ", createdBy=" + createdBy + ", modifiedBy="
-				+ modifiedBy + "]";
+				+ saveFullPath + ", originFileName=" + originFileName + ", status=" + status + ", createTime="
+				+ createTime + ", modifyTime=" + modifyTime + ", createBy=" + createBy + ", modifyBy="
+				+ modifyBy + "]";
 	}
 
 }

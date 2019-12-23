@@ -45,11 +45,11 @@ public class DefaultFileUploadService implements FileUploadService {
 
     public String save(FileUpload model) {
         if (model.getId() != null && model.getId().length() > 0) {
-            model.setModifiedTime(new Date());
+            model.setModifyTime(new Date());
             dbAccessor.update(model);
         } else {
             model.setId(UUID.randomUUID().toString());
-            model.setCreatedTime(new Date());
+            model.setCreateTime(new Date());
             model.setStatus(0);
             dbAccessor.insert(model);
         }
@@ -62,7 +62,7 @@ public class DefaultFileUploadService implements FileUploadService {
             FileUpload fileUpload = new FileUpload();
             fileUpload.setId(item.getId());
             fileUpload.setBizId(newBizId);
-            fileUpload.setModifiedTime(new Date());
+            fileUpload.setModifyTime(new Date());
             dbAccessor.update(fileUpload, true);
         });
     }
@@ -78,7 +78,7 @@ public class DefaultFileUploadService implements FileUploadService {
             FileUpload fileUpload = new FileUpload();
             fileUpload.setId(id);
             fileUpload.setStatus(CommonStatus.ENABLE.getValue());
-            fileUpload.setModifiedTime(new Date());
+            fileUpload.setModifyTime(new Date());
             dbAccessor.update(fileUpload, true);
         }
     }
