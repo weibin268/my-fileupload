@@ -18,8 +18,7 @@ public class FileUploadServiceTest {
 	
 	@Test
 	public void test() {
-		
-		fileUploadService.updateBizId("002", "003");
+
 		
 	}
 	

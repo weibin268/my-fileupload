@@ -7,21 +7,20 @@ import com.zhuang.data.orm.annotation.Table;
 import com.zhuang.data.orm.annotation.UnderscoreNaming;
 
 @UnderscoreNaming
-@Table(name="sys_fileupload")
+@Table(name = "sys_fileupload")
 public class FileUpload {
-	
-	@Id
+    @Id
     private String id;
-    private String templateId;
+    private String bizTable;
+    private String bizField;
     private String bizId;
-    private String saveFullPath;
-    private String originFileName;
+    private String filePath;
+    private String fileName;
     private Integer status;
     private Date createTime;
     private Date modifyTime;
     private String createBy;
     private String modifyBy;
-
 
 	public String getId() {
 		return id;
@@ -31,12 +30,20 @@ public class FileUpload {
 		this.id = id;
 	}
 
-	public String getTemplateId() {
-		return templateId;
+	public String getBizTable() {
+		return bizTable;
 	}
 
-	public void setTemplateId(String templateId) {
-		this.templateId = templateId;
+	public void setBizTable(String bizTable) {
+		this.bizTable = bizTable;
+	}
+
+	public String getBizField() {
+		return bizField;
+	}
+
+	public void setBizField(String bizField) {
+		this.bizField = bizField;
 	}
 
 	public String getBizId() {
@@ -46,21 +53,21 @@ public class FileUpload {
 	public void setBizId(String bizId) {
 		this.bizId = bizId;
 	}
-	
-	public String getSaveFullPath() {
-		return saveFullPath;
+
+	public String getFilePath() {
+		return filePath;
 	}
 
-	public void setSaveFullPath(String saveFullPath) {
-		this.saveFullPath = saveFullPath;
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
 	}
 
-	public String getOriginFileName() {
-		return originFileName;
+	public String getFileName() {
+		return fileName;
 	}
 
-	public void setOriginFileName(String originFileName) {
-		this.originFileName = originFileName;
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
 	}
 
 	public Integer getStatus() {
@@ -102,13 +109,4 @@ public class FileUpload {
 	public void setModifyBy(String modifyBy) {
 		this.modifyBy = modifyBy;
 	}
-
-	@Override
-	public String toString() {
-		return "FileUpload [id=" + id + ", templateId=" + templateId + ", bizId=" + bizId + ", saveFullPath="
-				+ saveFullPath + ", originFileName=" + originFileName + ", status=" + status + ", createTime="
-				+ createTime + ", modifyTime=" + modifyTime + ", createBy=" + createBy + ", modifyBy="
-				+ modifyBy + "]";
-	}
-
 }
