@@ -62,6 +62,7 @@ public class FileUploadManager {
     }
 
     public void submit(List<String> idList, String bizTable, String bizField, String bizId) {
+        fileUploadService.disable(bizTable, bizField, bizId);
         idList.forEach(id -> {
             fileUploadService.submit(id, bizTable, bizField, bizId);
         });
