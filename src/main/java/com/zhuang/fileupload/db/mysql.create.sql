@@ -2,9 +2,9 @@ DROP TABLE IF EXISTS sys_fileupload;
 CREATE TABLE sys_fileupload
 (
     id          VARCHAR(50) PRIMARY KEY,
-    biz_table   VARCHAR(50)   NOT NULL,
+    biz_table   VARCHAR(50),
     biz_field   VARCHAR(30),
-    biz_id      VARCHAR(36)   NOT NULL,
+    biz_id      VARCHAR(36),
     file_path   VARCHAR(1000) NOT NULL,
     file_name   VARCHAR(500),
     status      INT,

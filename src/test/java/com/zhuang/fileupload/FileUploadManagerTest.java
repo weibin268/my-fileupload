@@ -23,7 +23,7 @@ public class FileUploadManagerTest {
     public void upload() throws IOException {
 
         InputStream inputStream = new FileInputStream(new File("/home/zhuang/myfiles/doc/test.txt"));
-        FileUpload fileUpload = fileUploadManager.upload(inputStream, "sys_user", "pic", "test.txt", "123");
+        FileUpload fileUpload = fileUploadManager.upload(inputStream, "sys_user/pic", "test.txt");
         fileUploadManager.submit("6ae77d11-7b5d-4086-b506-9d74ee89f41c,d5a352d1-c6c2-46e2-a90f-588f5fceace0", "", "", "");
         inputStream.close();
 
@@ -46,7 +46,7 @@ public class FileUploadManagerTest {
     @Test
     public void download() throws IOException {
 
-        FileUpload fileUpload = fileUploadManager.getSysFileUpload("f005d5fb-4e3c-4876-ae6c-19a8346a8a51");
+        FileUpload fileUpload = fileUploadManager.getFileUpload("f005d5fb-4e3c-4876-ae6c-19a8346a8a51");
 
         System.out.println(fileUpload);
         InputStream inputStream = fileUploadManager.download(fileUpload);
@@ -70,7 +70,7 @@ public class FileUploadManagerTest {
     @Test
     public void getSysFileUploadList() {
 
-        List<FileUpload> fileUploads = fileUploadManager.getSysFileUploadList("", "");
+        List<FileUpload> fileUploads = fileUploadManager.getFileUploadList("sys_user", "pic","1");
 
         for (FileUpload fileUpload : fileUploads) {
             System.out.println(fileUpload);

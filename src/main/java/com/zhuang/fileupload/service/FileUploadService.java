@@ -12,9 +12,9 @@ public interface FileUploadService {
 
     void add(FileUpload model);
 
-    void disableByBizTableAndBizField(String bizTable, String bizField);
+    void disable(String bizTable, String bizField, String bizId);
 
-    List<FileUpload> getListByBizTableAndBizField(String bizTable, String bizField);
+    List<FileUpload> getList(String bizTable, String bizField, String bizId);
 
     void submit(String id, String bizTable, String bizField, String bizId);
 

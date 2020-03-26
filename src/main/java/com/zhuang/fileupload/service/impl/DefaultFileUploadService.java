@@ -41,10 +41,11 @@ public class DefaultFileUploadService implements FileUploadService {
     }
 
     @Override
-    public void disableByBizTableAndBizField(String bizTable, String bizField) {
+    public void disable(String bizTable, String bizField, String bizId) {
         FileUpload query = new FileUpload();
         query.setBizTable(bizTable);
         query.setBizField(bizField);
+        query.setBizId(bizId);
         List<FileUpload> fileUploadList = dbAccessor.selectList(query, FileUpload.class);
         fileUploadList.forEach(item -> {
             FileUpload fileUpload = new FileUpload();
@@ -56,10 +57,11 @@ public class DefaultFileUploadService implements FileUploadService {
     }
 
     @Override
-    public List<FileUpload> getListByBizTableAndBizField(String bizTable, String bizField) {
+    public List<FileUpload> getList(String bizTable, String bizField, String bizId) {
         FileUpload query = new FileUpload();
         query.setBizTable(bizTable);
         query.setBizField(bizField);
+        query.setBizId(bizId);
         query.setStatus(CommonStatus.ENABLE.getValue());
         List<FileUpload> fileUploadList = dbAccessor.selectList(query, FileUpload.class);
         return fileUploadList;
@@ -78,6 +80,8 @@ public class DefaultFileUploadService implements FileUploadService {
         update.setBizTable(bizTable);
         update.setBizField(bizField);
         update.setBizId(bizId);
+        update.setStatus(CommonStatus.ENABLE.getValue());
+        update.setModifyTime(new Date());
         dbAccessor.update(update, true);
     }
 }

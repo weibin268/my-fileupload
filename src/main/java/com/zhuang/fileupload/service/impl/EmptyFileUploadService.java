@@ -24,12 +24,12 @@ public class EmptyFileUploadService implements FileUploadService{
 	}
 
 	@Override
-	public void disableByBizTableAndBizField(String bizTable, String bizField) {
+	public void disable(String bizTable, String bizField, String bizId) {
 
 	}
 
 	@Override
-	public List<FileUpload> getListByBizTableAndBizField(String bizTable, String bizField) {
+	public List<FileUpload> getList(String bizTable, String bizField, String bizId) {
 		return null;
 	}
 
