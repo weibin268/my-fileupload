@@ -13,7 +13,9 @@ public class FileUtils {
     }
 
     public static String getDirPath(String fileFullPath) {
-        return fileFullPath.substring(0, fileFullPath.lastIndexOf("/"));
+        int index = fileFullPath.lastIndexOf("/");
+        if (index == -1) return null;
+        return fileFullPath.substring(0, index);
     }
 
     public static String getFileName(String fileFullPath) {

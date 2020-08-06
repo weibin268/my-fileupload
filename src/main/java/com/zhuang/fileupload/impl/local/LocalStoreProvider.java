@@ -24,9 +24,11 @@ public class LocalStoreProvider implements StoreProvider {
 		FileOutputStream fileOutputStream = null;
 		try {
 			String dirPath = FileUtils.getDirPath(fullPath);
-			File fileDir = new File(dirPath);
-			if (!fileDir.exists()) {
-				fileDir.mkdirs();
+			if (dirPath != null) {
+				File fileDir = new File(dirPath);
+				if (!fileDir.exists()) {
+					fileDir.mkdirs();
+				}
 			}
 			fileOutputStream = new FileOutputStream(new File(fullPath));
 			byte[] buffer = new byte[1024];
