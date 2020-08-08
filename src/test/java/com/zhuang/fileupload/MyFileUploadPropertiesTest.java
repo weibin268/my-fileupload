@@ -10,9 +10,9 @@ public class MyFileUploadPropertiesTest {
 	public void test() {
 		
 		MyFileUploadProperties fileUploadProperties=new MyFileUploadProperties();
-		System.out.println(fileUploadProperties.getFtpIp());
-		System.out.println(fileUploadProperties.getFtpUserName());
-		System.out.println(fileUploadProperties.getFtpPassword());
+		System.out.println(fileUploadProperties.getFtp().getIp());
+		System.out.println(fileUploadProperties.getFtp().getUserName());
+		System.out.println(fileUploadProperties.getFtp().getPassword());
 		
 	}
 	

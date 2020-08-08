@@ -20,7 +20,7 @@ public class LocalStoreProvider implements StoreProvider {
 	}
 
 	public void save(InputStream inputStream, String path) {
-		String fullPath = FileUtils.combinePath(fileUploadProperties.getLocalBasePath(), path);
+		String fullPath = FileUtils.combinePath(fileUploadProperties.getLocal().getBasePath(), path);
 		FileOutputStream fileOutputStream = null;
 		try {
 			String dirPath = FileUtils.getDirPath(fullPath);
@@ -55,7 +55,7 @@ public class LocalStoreProvider implements StoreProvider {
 	}
 
 	public InputStream get(String path) {
-		String fullPath = FileUtils.combinePath(fileUploadProperties.getLocalBasePath(), path);
+		String fullPath = FileUtils.combinePath(fileUploadProperties.getLocal().getBasePath(), path);
 		InputStream result = null;
 		try {
 			result = new FileInputStream(new File(fullPath));
@@ -67,7 +67,7 @@ public class LocalStoreProvider implements StoreProvider {
 	}
 
 	public void delete(String path) {
-		String fullPath = FileUtils.combinePath(fileUploadProperties.getLocalBasePath(), path);
+		String fullPath = FileUtils.combinePath(fileUploadProperties.getLocal().getBasePath(), path);
 		File file = new File(fullPath);
 		if (file.exists()) {
 			file.delete();
