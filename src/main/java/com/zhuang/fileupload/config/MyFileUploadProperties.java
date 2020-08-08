@@ -10,14 +10,13 @@ public class MyFileUploadProperties {
 
     private Properties properties;
 
-    private final static String STORE_PROVIDER = "my.fileupload.store-provider";
-
-    private final static String FTP_IP = "my.fileupload.ftp-ip";
-    private final static String FTP_USERNAME = "my.fileupload.ftp-username";
-    private final static String FTP_PASSWORD = "my.fileupload.ftp-password";
-    private final static String FTP_BASEPATH = "my.fileupload.ftp-basepath";
-
-    private final static String LOCAL_BASEPATH = "my.fileupload.local-basepath";
+    private final static String STORE_PROVIDER = "my.fileupload.storeProvider";
+    private final static String FTP_IP = "my.fileupload.ftp.ip";
+    private final static String FTP_USERNAME = "my.fileupload.ftp.username";
+    private final static String FTP_PASSWORD = "my.fileupload.ftp.password";
+    private final static String FTP_BASE_PATH = "my.fileupload.ftp.basePath";
+    private final static String FTP_CONNECTION_MODE = "my.fileupload.ftp.connectionMode";
+    private final static String LOCAL_BASE_PATH = "my.fileupload.local.basePath";
 
     public MyFileUploadProperties() {
         this("config/my-fileupload.properties");
@@ -57,7 +56,11 @@ public class MyFileUploadProperties {
     }
 
     public String getFtpBasePath() {
-        return properties.getProperty(FTP_BASEPATH);
+        return properties.getProperty(FTP_BASE_PATH);
+    }
+
+    public String getFtpConnectionMode() {
+        return properties.getProperty(FTP_CONNECTION_MODE);
     }
 
     public String getStoreProvider() {
@@ -65,7 +68,7 @@ public class MyFileUploadProperties {
     }
 
     public String getLocalBasePath() {
-        return properties.getProperty(LOCAL_BASEPATH);
+        return properties.getProperty(LOCAL_BASE_PATH);
     }
 
 }

@@ -10,8 +10,13 @@ public class FtpStoreProvider implements StoreProvider {
 
 	public FtpStoreProvider() {
 		MyFileUploadProperties fileUploadProperties = new MyFileUploadProperties();
+		FtpManager.ConnectionMode connectionMode = FtpManager.ConnectionMode.active;
+		if (fileUploadProperties.getFtpConnectionMode() != null && fileUploadProperties.getFtpConnectionMode() != "") {
+			connectionMode = FtpManager.ConnectionMode.getByValue(fileUploadProperties.getFtpConnectionMode());
+		}
 		ftpManager = new FtpManager(fileUploadProperties.getFtpIp(), fileUploadProperties.getFtpUserName(),
-				fileUploadProperties.getFtpPassword(),fileUploadProperties.getFtpBasePath());
+				fileUploadProperties.getFtpPassword(), fileUploadProperties.getFtpBasePath(),
+				connectionMode);
 
 	}
 
