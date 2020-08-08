@@ -16,7 +16,11 @@ public class LocalStoreProvider implements StoreProvider {
 	private MyFileUploadProperties fileUploadProperties;
 
 	public LocalStoreProvider() {
-		fileUploadProperties = new MyFileUploadProperties();
+		this(new MyFileUploadProperties());
+	}
+
+	public LocalStoreProvider(MyFileUploadProperties fileUploadProperties) {
+		this.fileUploadProperties = fileUploadProperties;
 	}
 
 	public void save(InputStream inputStream, String path) {

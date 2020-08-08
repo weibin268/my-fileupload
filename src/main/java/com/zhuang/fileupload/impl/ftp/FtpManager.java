@@ -39,7 +39,7 @@ public class FtpManager {
             String fileName = FileUtils.getFileName(fileFullPath);
             ensureDirectoryExists(ftpClient, dirPath);
             ftpClient.storeFile(fileName, inputStream);
-        } catch (IOException e) {
+        } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         } finally {
@@ -60,7 +60,7 @@ public class FtpManager {
                 byteArrayOutputStream.write(buffer, 0, count);
             }
             return new ByteArrayInputStream(byteArrayOutputStream.toByteArray());
-        } catch (IOException e) {
+        } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         } finally {
@@ -75,7 +75,7 @@ public class FtpManager {
             ftpClient = getFtpClient();
             gotoWorkingDirectory(ftpClient, basePath);
             ftpClient.deleteFile(fileName);
-        } catch (IOException e) {
+        } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         } finally {
@@ -105,7 +105,7 @@ public class FtpManager {
             try {
                 ftpClient.logout();
                 ftpClient.disconnect();
-            } catch (IOException e) {
+            } catch (Exception e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }

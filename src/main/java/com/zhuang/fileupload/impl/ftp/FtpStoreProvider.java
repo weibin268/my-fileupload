@@ -10,16 +10,18 @@ public class FtpStoreProvider implements StoreProvider {
     private FtpManager ftpManager;
 
     public FtpStoreProvider() {
-        MyFileUploadProperties fileUploadProperties = new MyFileUploadProperties();
-        FtpManager.ConnectionMode connectionMode = FtpManager.ConnectionMode.active;
-        if (fileUploadProperties.getFtp().getConnectionMode() != null && fileUploadProperties.getFtp().getConnectionMode() != "") {
-            connectionMode = FtpManager.ConnectionMode.getByValue(fileUploadProperties.getFtp().getConnectionMode());
-        }
-        ftpManager = new FtpManager(fileUploadProperties.getFtp().getIp(), fileUploadProperties.getFtp().getUserName(),
-                fileUploadProperties.getFtp().getPassword(), fileUploadProperties.getFtp().getBasePath(),
-                connectionMode);
-
+      this(new MyFileUploadProperties());
     }
+
+    public FtpStoreProvider(MyFileUploadProperties fileUploadProperties){
+		FtpManager.ConnectionMode connectionMode = FtpManager.ConnectionMode.active;
+		if (fileUploadProperties.getFtp().getConnectionMode() != null && fileUploadProperties.getFtp().getConnectionMode() != "") {
+			connectionMode = FtpManager.ConnectionMode.getByValue(fileUploadProperties.getFtp().getConnectionMode());
+		}
+		ftpManager = new FtpManager(fileUploadProperties.getFtp().getIp(), fileUploadProperties.getFtp().getUserName(),
+				fileUploadProperties.getFtp().getPassword(), fileUploadProperties.getFtp().getBasePath(),
+				connectionMode);
+	}
 
     public void save(InputStream inputStream, String path) {
         ftpManager.uploadFile(inputStream, path);
