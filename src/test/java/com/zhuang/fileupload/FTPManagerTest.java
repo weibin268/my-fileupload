@@ -17,7 +17,7 @@ public class FTPManagerTest {
 
     @Test
     public void uploadFile() throws FileNotFoundException {
-        FtpManager ftpManager = new FtpManager("127.0.0.1", "zwb", "123");
+        FtpManager ftpManager = new FtpManager("127.0.0.1", "zwb", "1231");
         InputStream inputStream = new FileInputStream(new File("e:/test.mp4"));
         ftpManager.uploadFile(inputStream, "test.mp4");
     }

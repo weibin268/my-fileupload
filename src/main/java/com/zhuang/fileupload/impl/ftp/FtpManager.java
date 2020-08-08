@@ -7,10 +7,14 @@ import java.io.InputStream;
 import java.util.Arrays;
 
 import org.apache.commons.net.ftp.FTPClient;
-
 import com.zhuang.fileupload.util.FileUtils;
+import org.apache.commons.net.ftp.FTPReply;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class FtpManager {
+
+    private Logger logger = LoggerFactory.getLogger(FtpManager.class);
 
     private String ip;
     private String userName;
@@ -39,6 +43,7 @@ public class FtpManager {
             String fileName = FileUtils.getFileName(fileFullPath);
             ensureDirectoryExists(ftpClient, dirPath);
             ftpClient.storeFile(fileName, inputStream);
+            handleReplyCode(ftpClient);
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -53,6 +58,7 @@ public class FtpManager {
             ftpClient = getFtpClient();
             gotoWorkingDirectory(ftpClient, basePath);
             InputStream inputStream = ftpClient.retrieveFileStream(fileName);
+            handleReplyCode(ftpClient);
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
             byte[] buffer = new byte[1024];
             int count;
@@ -75,6 +81,7 @@ public class FtpManager {
             ftpClient = getFtpClient();
             gotoWorkingDirectory(ftpClient, basePath);
             ftpClient.deleteFile(fileName);
+            handleReplyCode(ftpClient);
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -97,6 +104,7 @@ public class FtpManager {
         }
         ftpClient.setControlEncoding("UTF-8");// 中文支持
         ftpClient.setFileType(FTPClient.BINARY_FILE_TYPE);
+        handleReplyCode(ftpClient);
         return ftpClient;
     }
 
@@ -117,6 +125,12 @@ public class FtpManager {
         ftpClient.changeWorkingDirectory(path);
     }
 
+    public void handleReplyCode(FTPClient ftpClient) {
+        int reply = ftpClient.getReplyCode();
+        if (!FTPReply.isPositiveCompletion(reply)) {
+            logger.error("FTPClient get fail reply coded:" + reply);
+        }
+    }
 
     public void ensureDirectoryExists(FTPClient ftpClient, String path) throws IOException {
         if (path == null || path.length() == 0) return;
