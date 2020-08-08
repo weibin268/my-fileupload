@@ -128,7 +128,7 @@ public class FtpManager {
     public void handleReplyCode(FTPClient ftpClient) {
         int reply = ftpClient.getReplyCode();
         if (!FTPReply.isPositiveCompletion(reply)) {
-            logger.error("FTPClient get fail reply coded:" + reply);
+            logger.warn("FTPClient get fail reply coded:" + reply);
         }
     }
 
