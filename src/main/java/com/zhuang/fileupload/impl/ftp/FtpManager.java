@@ -4,6 +4,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
 
 import org.apache.commons.net.ftp.FTPClient;
 
@@ -15,17 +16,18 @@ public class FtpManager {
     private String userName;
     private String password;
     private String basePath;
+    private ConnectionMode connectionMode;
 
-    public FtpManager(String ip, String userName, String password, String basePath) {
+    public FtpManager(String ip, String userName, String password, String basePath, ConnectionMode connectionMode) {
         this.ip = ip;
         this.userName = userName;
         this.password = password;
         this.basePath = basePath;
-
+        this.connectionMode = connectionMode;
     }
 
     public FtpManager(String ip, String userName, String password) {
-        this(ip, userName, password, null);
+        this(ip, userName, password, null, ConnectionMode.active);
     }
 
     public void uploadFile(InputStream inputStream, String fileFullPath) {
@@ -49,7 +51,7 @@ public class FtpManager {
         FTPClient ftpClient = null;
         try {
             ftpClient = getFtpClient();
-            ensureDirectoryExists(ftpClient, basePath);
+            gotoWorkingDirectory(ftpClient, basePath);
             InputStream inputStream = ftpClient.retrieveFileStream(fileName);
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
             byte[] buffer = new byte[1024];
@@ -71,7 +73,7 @@ public class FtpManager {
         FTPClient ftpClient = null;
         try {
             ftpClient = getFtpClient();
-            ensureDirectoryExists(ftpClient, basePath);
+            gotoWorkingDirectory(ftpClient, basePath);
             ftpClient.deleteFile(fileName);
         } catch (IOException e) {
             // TODO Auto-generated catch block
@@ -90,6 +92,9 @@ public class FtpManager {
             ftpClient.connect(ip);
         }
         ftpClient.login(userName, password);
+        if (connectionMode == ConnectionMode.passive) {
+            ftpClient.enterLocalPassiveMode();
+        }
         ftpClient.setControlEncoding("UTF-8");// 中文支持
         ftpClient.setFileType(FTPClient.BINARY_FILE_TYPE);
         return ftpClient;
@@ -107,6 +112,12 @@ public class FtpManager {
         }
     }
 
+    public void gotoWorkingDirectory(FTPClient ftpClient, String path) throws IOException {
+        if (path == null || path.length() == 0) return;
+        ftpClient.changeWorkingDirectory(path);
+    }
+
+
     public void ensureDirectoryExists(FTPClient ftpClient, String path) throws IOException {
         if (path == null || path.length() == 0) return;
         String[] pathItems = path.split("\\/");
@@ -116,6 +127,32 @@ public class FtpManager {
                 ftpClient.mkd(item);
                 ftpClient.changeWorkingDirectory(item);
             }
+        }
+    }
+
+    public enum ConnectionMode {
+
+        active("active", "主动"),
+        passive("passive", "被动");
+
+        ConnectionMode(String value, String name) {
+            this.value = value;
+            this.name = name;
+        }
+
+        private String value;
+        private String name;
+
+        public String getValue() {
+            return value;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public static ConnectionMode getByValue(String value) {
+            return Arrays.stream(ConnectionMode.values()).filter(c -> c.getValue().equals(value)).findFirst().orElse(null);
         }
     }
 
