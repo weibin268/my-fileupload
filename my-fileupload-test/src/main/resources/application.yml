@@ -3,15 +3,17 @@ server:
   port: 8088
 # spring
 spring:
+  servlet:
+    multipart:
+      # 文件上传大小限制
+      max-file-size: 500MB
+      max-request-size: 500MB
+  # 数据源
   datasource:
     driverClassName: com.mysql.jdbc.Driver
     url: jdbc:mysql://weibin268.top:3306/upms?useSSL=false&useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true
     username: root
     password: 123456
-  servlet:
-    multipart:
-      max-file-size: 500MB
-      max-request-size: 500MB
 # logging
 logging:
   level:
