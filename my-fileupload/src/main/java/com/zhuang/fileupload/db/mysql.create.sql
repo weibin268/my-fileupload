@@ -7,6 +7,7 @@ CREATE TABLE sys_fileupload
     biz_id      VARCHAR(36),
     file_path   VARCHAR(1000) NOT NULL,
     file_name   VARCHAR(500),
+    file_size   int,
     status      INT,
     create_time DATETIME,
     modify_time DATETIME,

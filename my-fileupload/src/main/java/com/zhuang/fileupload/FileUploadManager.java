@@ -1,5 +1,6 @@
 package com.zhuang.fileupload;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
 import java.util.List;
@@ -28,11 +29,19 @@ public class FileUploadManager {
     }
 
     public FileUpload upload(InputStream inputStream, String path, String fileName) {
-        String filePath = path + "/" + UUID.randomUUID().toString() + FileUtils.getExtension(fileName);
-        storeProvider.save(inputStream, filePath);
         FileUpload fileUpload = new FileUpload();
+        String filePath = path + "/" + UUID.randomUUID().toString() + FileUtils.getExtension(fileName);
+        try {
+            //文件大小
+            fileUpload.setFileSize(inputStream.available());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         fileUpload.setFilePath(filePath);
         fileUpload.setFileName(fileName);
+        //保存文件
+        storeProvider.save(inputStream, filePath);
+        //保存记录
         fileUploadService.add(fileUpload);
         return fileUpload;
     }
