@@ -23,6 +23,7 @@ public class MyFileUploadProperties {
     }
 
     public MyFileUploadProperties(String configFile) {
+        if (configFile == null) return;
         InputStream inputStream = null;
         try {
             inputStream = this.getClass().getClassLoader().getResourceAsStream(configFile);
@@ -35,7 +36,7 @@ public class MyFileUploadProperties {
             this.ftp.setBasePath(properties.getProperty(FTP_BASE_PATH));
             this.ftp.setConnectionMode(properties.getProperty(FTP_CONNECTION_MODE));
             this.local.setBasePath(properties.getProperty(LOCAL_BASE_PATH));
-        } catch (IOException e) {
+        } catch (Exception e) {
             throw new LoadConfigException("加载“my-fileupload.properties”配置文件出错！");
         } finally {
             if (inputStream != null) {

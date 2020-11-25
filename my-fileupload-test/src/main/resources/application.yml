@@ -1,0 +1,28 @@
+# server
+server:
+  port: 8088
+# spring
+spring:
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://weibin268.top:3306/upms?useSSL=false&useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true
+    username: root
+    password: 2681645
+
+# logging
+logging:
+  level:
+    org.springframework.jdbc.datasource.DataSourceTransactionManager: debug
+    org.springframework.jdbc.datasource.DataSourceUtils: debug
+
+my:
+  fileUpload:
+    storeProvider: ftp
+    local:
+      basePath: "D:/fileupload"
+    ftp:
+      connectionMode: passive
+      ip: 192.168.1.134:33035
+      userName: YdCloud
+      password: 5s4G7c8r
+      basePath: dev/test
