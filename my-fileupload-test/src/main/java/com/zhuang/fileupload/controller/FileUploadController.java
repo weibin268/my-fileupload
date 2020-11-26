@@ -56,8 +56,8 @@ public class FileUploadController {
 
     @RequestMapping(value = "download")
     public void download(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String fId = request.getParameter("fId");//文件上传Id
-        FileUpload fileUpload = fileUploadManager.getFileUpload(fId);
+        String id = request.getParameter("id");//文件上传Id
+        FileUpload fileUpload = fileUploadManager.getFileUpload(id);
         String fileName = fileUpload.getFileName();
         fileName = new String(fileName.getBytes("utf-8"), "ISO8859-1");//chrome,firefox
         //fileName=URLEncoder.encode(fileName,"utf-8");//IE
