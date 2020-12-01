@@ -1,4 +1,4 @@
-package com.zhuang.fileupload.autoconfigure;
+package com.zhuang.fileupload;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -85,4 +85,5 @@ public class MyFileUploadProperties {
     public Local getLocal() {
         return local;
     }
+
 }

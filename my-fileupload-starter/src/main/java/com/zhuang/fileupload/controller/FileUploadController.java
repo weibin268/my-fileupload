@@ -2,6 +2,7 @@ package com.zhuang.fileupload.controller;
 
 import com.zhuang.fileupload.FileUploadManager;
 import com.zhuang.fileupload.model.ApiResult;
+import com.zhuang.fileupload.model.FileInfo;
 import com.zhuang.fileupload.model.FileUpload;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,34 +30,34 @@ public class FileUploadController {
 
     @RequestMapping(value = "upload")
     @ResponseBody
-    public Object upload(HttpServletRequest request, @RequestParam MultipartFile file) throws IOException {
+    public ApiResult<FileInfo> upload(HttpServletRequest request, @RequestParam MultipartFile file) throws IOException {
         String path = request.getParameter("path");
         InputStream inputStream;
         inputStream = file.getInputStream();
         FileUpload fileUpload = fileUploadManager.upload(inputStream, path, file.getOriginalFilename());
-        return ApiResult.success(fileUpload);
+        return ApiResult.success(FileInfo.parse(fileUpload));
     }
 
     @RequestMapping(value = "uploadBatch")
     @ResponseBody
-    public Object uploadBatch(HttpServletRequest request, MultipartFile[] files) throws IOException {
+    public ApiResult<List<FileInfo>> uploadBatch(HttpServletRequest request, MultipartFile[] files) throws IOException {
         String path = request.getParameter("path");
-        List<FileUpload> fileUploadList = new ArrayList<>();
+        List<FileInfo> fileInfoList = new ArrayList<>();
         StandardMultipartHttpServletRequest multipartRequest = (StandardMultipartHttpServletRequest) request;
         for (Map.Entry<String, List<MultipartFile>> entry : multipartRequest.getMultiFileMap().entrySet()) {
             for (MultipartFile file : entry.getValue()) {
                 InputStream inputStream;
                 inputStream = file.getInputStream();
                 FileUpload fileUpload = fileUploadManager.upload(inputStream, path, file.getOriginalFilename());
-                fileUploadList.add(fileUpload);
+                fileInfoList.add(FileInfo.parse(fileUpload));
             }
         }
-        return ApiResult.success(fileUploadList);
+        return ApiResult.success(fileInfoList);
     }
 
     @RequestMapping(value = "download")
     public void download(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String id = request.getParameter("id");//文件上传Id
+        String id = request.getParameter("fileId");//文件上传Id
         FileUpload fileUpload = fileUploadManager.getFileUpload(id);
         String fileName = fileUpload.getFileName();
         fileName = new String(fileName.getBytes("utf-8"), "ISO8859-1");//chrome,firefox

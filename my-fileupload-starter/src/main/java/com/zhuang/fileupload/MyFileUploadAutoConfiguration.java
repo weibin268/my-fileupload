@@ -1,6 +1,5 @@
-package com.zhuang.fileupload.autoconfigure;
+package com.zhuang.fileupload;
 
-import com.zhuang.fileupload.FileUploadManager;
 import com.zhuang.fileupload.enums.StoreProviderType;
 import com.zhuang.fileupload.impl.ftp.FtpStoreProvider;
 import com.zhuang.fileupload.impl.local.LocalStoreProvider;

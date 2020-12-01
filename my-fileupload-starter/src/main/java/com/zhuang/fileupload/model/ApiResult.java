@@ -29,16 +29,16 @@ public class ApiResult<T> implements Serializable {
         return result;
     }
 
-    public static ApiResult error(String message, Object data) {
-        ApiResult result = new ApiResult();
+    public static <T> ApiResult<T> error(String message, T data) {
+        ApiResult<T> result = new ApiResult();
         result.setCode(1);
         result.setMessage(message);
         result.setData(data);
         return result;
     }
 
-    public static ApiResult error(int code, String message, Object data) {
-        ApiResult result = new ApiResult();
+    public static <T> ApiResult<T> error(int code, String message, T data) {
+        ApiResult<T> result = new ApiResult();
         result.setCode(code);
         result.setMessage(message);
         result.setData(data);
@@ -49,8 +49,8 @@ public class ApiResult<T> implements Serializable {
         return new ApiResult();
     }
 
-    public static ApiResult success(Object data) {
-        ApiResult result = new ApiResult();
+    public static <T> ApiResult<T> success(T data) {
+        ApiResult<T> result = new ApiResult<>();
         result.setData(data);
         return result;
     }

@@ -2,7 +2,7 @@ package com.zhuang.fileupload.enums;
 
 import java.util.Arrays;
 
-public enum FileUploadBiz {
+public enum FileUploadBiz implements BizInfo {
 
     sys_user$pic("sys_user", "pic", "用户表.头像");
 
@@ -20,15 +20,15 @@ public enum FileUploadBiz {
     private String value;
     private String description;
 
-    public String getTable(){
+    public String getTable() {
         return this.table;
     }
 
-    public String getField(){
+    public String getField() {
         return this.field;
     }
 
-    public String getValue(){
+    public String getValue() {
         return this.value;
     }
 
