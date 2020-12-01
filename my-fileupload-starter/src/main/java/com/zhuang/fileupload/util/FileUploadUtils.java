@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
 import javax.annotation.PostConstruct;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,6 +27,10 @@ public class FileUploadUtils {
     @PostConstruct
     public void init() {
         _this = this;
+    }
+
+    public static void save(BizInfo bizInfo, String bizId, FileInfo fileInfo) {
+        save(bizInfo, bizId, Arrays.asList(fileInfo));
     }
 
     public static void save(BizInfo bizInfo, String bizId, List<FileInfo> fileInfoList) {
