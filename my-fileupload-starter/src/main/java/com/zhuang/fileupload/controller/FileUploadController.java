@@ -63,16 +63,14 @@ public class FileUploadController {
         fileName = new String(fileName.getBytes("utf-8"), "ISO8859-1");//chrome,firefox
         //fileName=URLEncoder.encode(fileName,"utf-8");//IE
         response.setHeader("content-disposition", "attachment;filename=" + fileName);
-        InputStream inputStream;
-        OutputStream outputStream;
-        inputStream = fileUploadManager.download(fileUpload);
-        outputStream = response.getOutputStream();
-        byte[] buffer = new byte[1024];
-        int readCount;
-        while ((readCount = inputStream.read(buffer)) != -1) {
-            outputStream.write(buffer, 0, readCount);
+        try (InputStream inputStream = fileUploadManager.download(fileUpload)) {
+            OutputStream outputStream = response.getOutputStream();
+            byte[] buffer = new byte[1024];
+            int readCount;
+            while ((readCount = inputStream.read(buffer)) != -1) {
+                outputStream.write(buffer, 0, readCount);
+            }
         }
-        inputStream.close();
     }
 
 }
