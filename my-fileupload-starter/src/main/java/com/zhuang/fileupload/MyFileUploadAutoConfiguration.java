@@ -29,6 +29,8 @@ public class MyFileUploadAutoConfiguration {
             fileUploadManager = new FileUploadManager(ftpStoreProvider(), fileUploadService());
         } else if (myFileuploadProperties.getStoreProvider().equalsIgnoreCase(StoreProviderType.LOCAL.getValue())) {
             fileUploadManager = new FileUploadManager(localStoreProvider(), fileUploadService());
+        } else if (myFileuploadProperties.getStoreProvider().equalsIgnoreCase(StoreProviderType.WEB_DAV.getValue())) {
+            fileUploadManager = new FileUploadManager(localStoreProvider(), fileUploadService());
         }
         return fileUploadManager;
     }
@@ -48,6 +50,7 @@ public class MyFileUploadAutoConfiguration {
         BeanUtils.copyProperties(myFileuploadProperties, result);
         BeanUtils.copyProperties(myFileuploadProperties.getFtp(), result.getFtp());
         BeanUtils.copyProperties(myFileuploadProperties.getLocal(), result.getLocal());
+        BeanUtils.copyProperties(myFileuploadProperties.getWebDav(), result.getWebDav());
         return result;
     }
 

@@ -4,7 +4,8 @@ import java.util.Arrays;
 
 public enum StoreProviderType {
     FTP("ftp"),
-    LOCAL("local");
+    LOCAL("local"),
+    WEB_DAV("webDav");
 
     private String value;
 
