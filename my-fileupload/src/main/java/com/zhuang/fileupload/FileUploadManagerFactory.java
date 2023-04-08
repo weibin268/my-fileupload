@@ -4,6 +4,7 @@ import com.zhuang.fileupload.config.MyFileUploadProperties;
 import com.zhuang.fileupload.enums.StoreProviderType;
 import com.zhuang.fileupload.impl.ftp.FtpStoreProvider;
 import com.zhuang.fileupload.impl.local.LocalStoreProvider;
+import com.zhuang.fileupload.impl.webdav.WebDavStoreProvider;
 import com.zhuang.fileupload.service.impl.DefaultFileUploadService;
 
 public class FileUploadManagerFactory {
@@ -17,6 +18,8 @@ public class FileUploadManagerFactory {
 				fileUploadManager = new FileUploadManager(new FtpStoreProvider(), new DefaultFileUploadService());
 			} else if (myFileUploadProperties.getStoreProvider().equalsIgnoreCase(StoreProviderType.LOCAL.getValue())) {
 				fileUploadManager = new FileUploadManager(new LocalStoreProvider(), new DefaultFileUploadService());
+			} else if (myFileUploadProperties.getStoreProvider().equalsIgnoreCase(StoreProviderType.WEB_DAV.getValue())) {
+				fileUploadManager = new FileUploadManager(new WebDavStoreProvider(), new DefaultFileUploadService());
 			}
 		}
 		return fileUploadManager;
