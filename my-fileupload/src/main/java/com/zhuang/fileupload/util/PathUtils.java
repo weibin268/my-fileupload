@@ -42,8 +42,9 @@ public class PathUtils {
     }
 
     public static String getDir(String path) {
-        String[] split = path.split("\\/");
-        if (split.length == 1) return split[0];
-        return split[split.length - 2];
+        if (path == null) return null;
+        int i = path.lastIndexOf("/");
+        if (i == -1) return path;
+        return path.substring(0, i);
     }
 }
