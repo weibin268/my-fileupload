@@ -17,6 +17,9 @@ public class MyFileUploadProperties {
     private final static String FTP_BASE_PATH = "my.fileupload.ftp.basePath";
     private final static String FTP_CONNECTION_MODE = "my.fileupload.ftp.connectionMode";
     private final static String LOCAL_BASE_PATH = "my.fileupload.local.basePath";
+    private final static String WEB_DAV_USERNAME = "my.fileupload.webDav.username";
+    private final static String WEB_DAV_PASSWORD = "my.fileupload.webDav.password";
+    private final static String WEB_DAV_BASE_URL = "my.fileupload.webDav.baseUrl";
 
     public MyFileUploadProperties() {
         this("config/my-fileupload.properties");
@@ -36,6 +39,9 @@ public class MyFileUploadProperties {
             this.ftp.setBasePath(properties.getProperty(FTP_BASE_PATH));
             this.ftp.setConnectionMode(properties.getProperty(FTP_CONNECTION_MODE));
             this.local.setBasePath(properties.getProperty(LOCAL_BASE_PATH));
+            this.webDav.setUsername(properties.getProperty(WEB_DAV_USERNAME));
+            this.webDav.setPassword(properties.getProperty(WEB_DAV_PASSWORD));
+            this.webDav.setBaseUrl(properties.getProperty(WEB_DAV_BASE_URL));
         } catch (Exception e) {
             throw new LoadConfigException("加载“my-fileupload.properties”配置文件出错！");
         } finally {
@@ -53,6 +59,7 @@ public class MyFileUploadProperties {
     private String storeProvider = "local";
     private final Ftp ftp = new Ftp();
     private final Local local = new Local();
+    private final WebDav webDav = new WebDav();
 
     public String getStoreProvider() {
         return storeProvider;
@@ -68,6 +75,10 @@ public class MyFileUploadProperties {
 
     public Local getLocal() {
         return local;
+    }
+
+    public WebDav getWebDav() {
+        return webDav;
     }
 
     public static class Ftp {
@@ -128,6 +139,40 @@ public class MyFileUploadProperties {
 
         public void setBasePath(String basePath) {
             this.basePath = basePath;
+        }
+    }
+
+
+    public static class WebDav {
+
+        private String baseUrl = "";
+
+        private String username;
+
+        private String password;
+
+        public String getBaseUrl() {
+            return baseUrl;
+        }
+
+        public void setBaseUrl(String baseUrl) {
+            this.baseUrl = baseUrl;
+        }
+
+        public String getUsername() {
+            return username;
+        }
+
+        public void setUsername(String username) {
+            this.username = username;
+        }
+
+        public String getPassword() {
+            return password;
+        }
+
+        public void setPassword(String password) {
+            this.password = password;
         }
     }
 }

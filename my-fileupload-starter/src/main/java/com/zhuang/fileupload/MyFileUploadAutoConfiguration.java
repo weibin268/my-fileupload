@@ -3,6 +3,7 @@ package com.zhuang.fileupload;
 import com.zhuang.fileupload.enums.StoreProviderType;
 import com.zhuang.fileupload.impl.ftp.FtpStoreProvider;
 import com.zhuang.fileupload.impl.local.LocalStoreProvider;
+import com.zhuang.fileupload.impl.webdav.WebDavStoreProvider;
 import com.zhuang.fileupload.service.FileUploadService;
 import com.zhuang.fileupload.service.impl.MyBatisPlusFileUploadService;
 import org.mybatis.spring.annotation.MapperScan;
@@ -29,6 +30,8 @@ public class MyFileUploadAutoConfiguration {
             fileUploadManager = new FileUploadManager(ftpStoreProvider(), fileUploadService());
         } else if (myFileuploadProperties.getStoreProvider().equalsIgnoreCase(StoreProviderType.LOCAL.getValue())) {
             fileUploadManager = new FileUploadManager(localStoreProvider(), fileUploadService());
+        } else if (myFileuploadProperties.getStoreProvider().equalsIgnoreCase(StoreProviderType.WEB_DAV.getValue())) {
+            fileUploadManager = new FileUploadManager(webDavStoreProvider(), fileUploadService());
         }
         return fileUploadManager;
     }
@@ -43,11 +46,17 @@ public class MyFileUploadAutoConfiguration {
         return new LocalStoreProvider(getMyFileUploadProperties(myFileuploadProperties));
     }
 
+    @Bean
+    public WebDavStoreProvider webDavStoreProvider() {
+        return new WebDavStoreProvider(getMyFileUploadProperties(myFileuploadProperties));
+    }
+
     private com.zhuang.fileupload.config.MyFileUploadProperties getMyFileUploadProperties(MyFileUploadProperties myFileuploadProperties) {
         com.zhuang.fileupload.config.MyFileUploadProperties result = new com.zhuang.fileupload.config.MyFileUploadProperties(null);
         BeanUtils.copyProperties(myFileuploadProperties, result);
         BeanUtils.copyProperties(myFileuploadProperties.getFtp(), result.getFtp());
         BeanUtils.copyProperties(myFileuploadProperties.getLocal(), result.getLocal());
+        BeanUtils.copyProperties(myFileuploadProperties.getWebDav(), result.getWebDav());
         return result;
     }
 

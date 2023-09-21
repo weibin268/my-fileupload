@@ -29,6 +29,9 @@ public class FileUploadManager {
     }
 
     public FileUpload upload(InputStream inputStream, String path, String fileName) {
+        if (path == null) {
+            path = "";
+        }
         FileUpload fileUpload = new FileUpload();
         String filePath = path + "/" + UUID.randomUUID().toString() + FileUtils.getExtension(fileName);
         try {

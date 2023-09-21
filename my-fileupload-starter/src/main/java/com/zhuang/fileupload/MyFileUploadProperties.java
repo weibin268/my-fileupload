@@ -8,6 +8,7 @@ public class MyFileUploadProperties {
     private String storeProvider = "local";
     private final Ftp ftp = new Ftp();
     private final Local local = new Local();
+    private final WebDav webDav = new WebDav();
 
     public static class Ftp {
         private String ip = "127.0.0.1";
@@ -70,6 +71,39 @@ public class MyFileUploadProperties {
         }
     }
 
+    public static class WebDav {
+
+        private String baseUrl = "";
+
+        private String username;
+
+        private String password;
+
+        public String getBaseUrl() {
+            return baseUrl;
+        }
+
+        public void setBaseUrl(String baseUrl) {
+            this.baseUrl = baseUrl;
+        }
+
+        public String getUsername() {
+            return username;
+        }
+
+        public void setUsername(String username) {
+            this.username = username;
+        }
+
+        public String getPassword() {
+            return password;
+        }
+
+        public void setPassword(String password) {
+            this.password = password;
+        }
+    }
+
     public String getStoreProvider() {
         return storeProvider;
     }
@@ -86,4 +120,7 @@ public class MyFileUploadProperties {
         return local;
     }
 
+    public WebDav getWebDav() {
+        return webDav;
+    }
 }

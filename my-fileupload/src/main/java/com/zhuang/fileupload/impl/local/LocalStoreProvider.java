@@ -62,7 +62,7 @@ public class LocalStoreProvider implements StoreProvider {
 		String fullPath = FileUtils.combinePath(fileUploadProperties.getLocal().getBasePath(), path);
 		InputStream result = null;
 		try {
-			result = new FileInputStream(new File(fullPath));
+			result = new FileInputStream(fullPath);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
