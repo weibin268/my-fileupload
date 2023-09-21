@@ -32,10 +32,10 @@ public class FileUploadController {
     @ResponseBody
     public ApiResult<FileInfo> upload(HttpServletRequest request, @RequestParam MultipartFile file) throws IOException {
         String path = request.getParameter("path");
-        InputStream inputStream;
-        inputStream = file.getInputStream();
-        FileUpload fileUpload = fileUploadManager.upload(inputStream, path, file.getOriginalFilename());
-        return ApiResult.success(FileInfo.parse(fileUpload));
+        try (InputStream inputStream = file.getInputStream()) {
+            FileUpload fileUpload = fileUploadManager.upload(inputStream, path, file.getOriginalFilename());
+            return ApiResult.success(FileInfo.parse(fileUpload));
+        }
     }
 
     @RequestMapping(value = "uploadBatch")
@@ -46,10 +46,10 @@ public class FileUploadController {
         StandardMultipartHttpServletRequest multipartRequest = (StandardMultipartHttpServletRequest) request;
         for (Map.Entry<String, List<MultipartFile>> entry : multipartRequest.getMultiFileMap().entrySet()) {
             for (MultipartFile file : entry.getValue()) {
-                InputStream inputStream;
-                inputStream = file.getInputStream();
-                FileUpload fileUpload = fileUploadManager.upload(inputStream, path, file.getOriginalFilename());
-                fileInfoList.add(FileInfo.parse(fileUpload));
+                try (InputStream inputStream = file.getInputStream()) {
+                    FileUpload fileUpload = fileUploadManager.upload(inputStream, path, file.getOriginalFilename());
+                    fileInfoList.add(FileInfo.parse(fileUpload));
+                }
             }
         }
         return ApiResult.success(fileInfoList);
@@ -72,6 +72,7 @@ public class FileUploadController {
         while ((readCount = inputStream.read(buffer)) != -1) {
             outputStream.write(buffer, 0, readCount);
         }
+        outputStream.close();
         inputStream.close();
     }
 
